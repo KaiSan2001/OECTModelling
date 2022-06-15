@@ -37,8 +37,8 @@ f_Mesh = 10; %Can be changed to any other frequency
 w_Mesh = 2*pi*f_Mesh; %Angular frequency
 Cch = 100e-9; %Capacitance of channel side
 Ri =1000; %Internal Resistance
-R_g2Ch = 10^-1 :0.1: 10^3;
-Rb_M = 10:100:10^6;
+R_g2Ch = 10^-1 :0.1: 10^2; %Truncated the 10^2 to 10^3 part
+Rb_M = 10:10:10^6; % The step size will affect the initial phase
 Rdu_M2 = []; dU_M2 = [];
 for i = 1:length(R_g2Ch)
     Cg_e = Cch * R_g2Ch(i);Cb_e = 0.1*Cg_e;
@@ -54,5 +54,4 @@ Rdu_M2 = Rdu_M2.';
 figure
 mesh(R_g2Ch,Rb_M,Rdu_M2);set(gca,'xscale','log');set(gca,'yscale','log');
 xlabel("C_g/C_c_h");ylabel("R_b");zlabel("Maximum Response");title("Mesh Plot of ΔU")
-
 
